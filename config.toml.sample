@@ -1,0 +1,21 @@
+# botのトークン
+token = ""
+
+# botのコマンド接頭辞
+prefix = ["!"]
+
+# botのコマンドを実行できるユーザーのid
+# (信用できる人のidのみを設定してください)
+alloweds = []
+
+# pythonの実行コマンド
+py = "py"
+
+# javascriptの実行コマンド
+js = "node"
+
+# C#の実行コマンド
+cs = "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/Roslyn/csc.exe"
+
+# C# Interactiveの実行コマンド
+csi = "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/Roslyn/csi.exe"
