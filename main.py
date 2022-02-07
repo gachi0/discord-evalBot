@@ -8,10 +8,11 @@ config = toml.load(open("config.toml", encoding="utf-8"))
 bot = cmds.Bot(
     command_prefix=config["prefix"],
     case_insensitive=True,
-    intents=discord.Intents.default())
+    intents=discord.Intents.default(),
+    help_command=None)
 
 
-async def run(ctx: cmds.Context, text: str, cmd: str, exe=False):
+async def run(ctx: cmds.Context, text: str, cmd: str | list, exe=False):
     # 許可されている人でなければ帰る
     if ctx.author.id not in config["alloweds"]:
         await ctx.reply("許可されていません。")
@@ -38,7 +39,10 @@ async def run(ctx: cmds.Context, text: str, cmd: str, exe=False):
                 os.remove(exename)
         else:
             # 出力を記録
-            result = sbp.getoutput([cmd, name])
+            if isinstance(cmd, list):
+                result = sbp.getoutput([*cmd, name])
+            else:
+                result = sbp.getoutput([cmd, name])
         # 出力結果を返信
         await ctx.reply(result if result != "" else "表示なし")
     except Exception as e:
@@ -66,5 +70,15 @@ async def csharp(ctx: cmds.Context, *, text: str):
 @bot.command(aliases=["csi", "csharpi", "c#i"])
 async def csharp_interactive(ctx: cmds.Context, *, text: str):
     await run(ctx, text, config["csi"])
+
+
+@bot.command(aliases=["ts", "ts-node", "tsc"])
+async def typescript(ctx: cmds.Context, *, text: str):
+    await run(ctx, text, config["ts"])
+
+
+async def help(ctx: cmds.Context):
+    await ctx.reply("https://github.com/gachi0/discord-evalBot/blob/main/README.md")
+
 
 bot.run(config["token"])

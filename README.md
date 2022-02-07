@@ -53,6 +53,21 @@ JavaScript(node)のコードを実行します。
 4
 ```
 
+## ts, typescript, ts-node
+TypeScript(ts-node)のコードを実行します。
+### 使用例: 
+```
+!ts for(let i=0;i<5;i++) console.log(i);
+```
+出力:
+```
+0
+1
+2
+3
+4
+```
+
 ## cs, c#, csharp, csc
 C#のコードを実行します
 ### 使用例: 
